@@ -1,60 +1,112 @@
 body {
   font-family: Gordita, Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  background-color: #101010;
+  color: white;
+  min-height: 100vh;
 }
 
-a {
-  margin-right: 1rem;
+ul:where([class]) {
+  margin: 0;
+  padding: 0;
 }
 
 main {
+  display: grid;
+  min-height: 100%;
+  grid-template-columns: clamp(240px, 26vw, 400px) 1fr clamp(240px, 26vw, 400px);
+  grid-gap: 2rem;
+  padding: 1rem;
+}
+
+.CharacterSheet {
+  position: relative;
+  padding: 2rem;
+  border: 1px solid #ccc;
+
+  h2 {
+    margin-block-start: 0;
+    text-align: center;
+  }
+
+  h3 {
+    margin-block-start: 0;
+    border-block-end: 1px solid #ccc;
+  }
+
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    border-style: solid;
+    border-color: #ccc;
+    border-width: 0;
+  }
+
+  &::before {
+    inset-block: 32px;
+    inset-inline: -8px;
+    border-inline-width: 1px;
+  }
+
+  &::after {
+    inset-block: -8px;
+    inset-inline: 64px;
+    border-block-width: 1px;
+  }
+
+  img {
+    max-width: 100%;
+  }
+}
+
+.Modules {
+  position: relative;
+  display: grid;
+  grid-gap: 4px;
+  grid-template: 
+    "heading heading heading" auto 
+    "equipment image armaments" 1fr 
+    / 64px 1fr 64px;
+}
+
+.Modules h3 {
+  grid-area: heading;
+}
+
+.Modules img {
+  grid-area: image;
+}
+
+.Modules-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  list-style: none;
+  overflow: auto;
+}
+
+.Modules-list--equipment {
+  grid-area: equipment;
+}
+
+.Modules-list--armaments {
+  grid-area: armaments;
+}
+
+.Modules-list > li {
+  display: contents;
+}
+
+.Module {
+  align-content: center;
+  background-color: #333;
   text-align: center;
-  padding: 1em;
-  margin: 0 auto;
+  aspect-ratio: 1/1;
+  width: 64px;
 }
 
-h1 {
-  color: #335d92;
-  text-transform: uppercase;
-  font-size: 4rem;
-  font-weight: 100;
-  line-height: 1.1;
-  margin: 4rem auto;
-  max-width: 14rem;
-}
-
-p {
-  max-width: 14rem;
-  margin: 2rem auto;
-  line-height: 1.35;
-}
-
-@media (min-width: 480px) {
-  h1 {
-    max-width: none;
-  }
-
-  p {
-    max-width: none;
-  }
-}
-
-.increment {
-  font-family: inherit;
-  font-size: inherit;
-  padding: 1em 2em;
-  color: #335d92;
-  background-color: rgba(68, 107, 158, 0.1);
-  border-radius: 2em;
-  border: 2px solid rgba(68, 107, 158, 0);
-  outline: none;
-  width: 200px;
-  font-variant-numeric: tabular-nums;
-}
-
-.increment:focus {
-  border: 2px solid #335d92;
-}
-
-.increment:active {
-  background-color: rgba(68, 107, 158, 0.2);
+.StatusBar {
+  display: flex;
 }
